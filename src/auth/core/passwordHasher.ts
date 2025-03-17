@@ -1,8 +1,11 @@
-import crypto from "crypto"
+import crypto from "crypto" // this man is entirely built into nodejs
 
 export function hashPassword(password: string, salt: string): Promise<string> {
   return new Promise((resolve, reject) => {
-    crypto.scrypt(password.normalize(), salt, 64, (error, hash) => {
+
+    // we normalize the password to make sure that there is no weird characters in the password !
+    
+    crypto.scrypt(password.normalize(), salt, 64, (error, hash) => {   // the modern equivalnt to bcrypt OH yeah
       if (error) reject(error)
 
       resolve(hash.toString("hex").normalize())
